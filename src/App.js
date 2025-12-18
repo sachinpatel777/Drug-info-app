@@ -3,31 +3,25 @@ import {
   Table, TableBody, TableCell, TableContainer, TableHead, 
   TableRow, Paper, Select, MenuItem, FormControl, InputLabel, Box, Typography 
 } from '@mui/material';
-
-// Sirf drugs.json import karein
 import drugData from './drugs.json';
 
 const App = () => {
   const [selectedCompany, setSelectedCompany] = useState('');
 
-  // 1. Data Processing: Sorting (Descending) aur ID assignment
   const processedData = useMemo(() => {
     return [...drugData]
       .sort((a, b) => new Date(b.launchDate) - new Date(a.launchDate))
       .map((item, index) => ({ ...item, id: index + 1 }));
   }, []);
 
-  // 2. Unique Companies List
   const companies = useMemo(() => {
     return [...new Set(processedData.map((d) => d.company))].sort();
   }, [processedData]);
 
-  // 3. Filter Logic
   const filteredDrugs = selectedCompany
     ? processedData.filter((d) => d.company === selectedCompany)
     : processedData;
 
-  // 4. Date Formatter (User Locale)
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString();
   };
@@ -38,7 +32,6 @@ const App = () => {
         Drug Information System
       </Typography>
 
-      {/* Filter Dropdown */}
       <FormControl sx={{ mb: 4, minWidth: 300 }}>
         <InputLabel id="company-select-label">Filter by Company</InputLabel>
         <Select
@@ -54,7 +47,6 @@ const App = () => {
         </Select>
       </FormControl>
 
-      {/* Material UI Table */}
       <TableContainer component={Paper} elevation={3}>
         <Table sx={{ minWidth: 650 }}>
           <TableHead sx={{ backgroundColor: '#eeeeee' }}>
