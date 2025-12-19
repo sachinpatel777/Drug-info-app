@@ -15,6 +15,11 @@ A React-based web application to view and filter drug information.
 - Jest & React Testing Library (for unit tests)
 - JSON (Local data source)
 
+## Architecture
+- **Custom Hooks**: Business logic separated using `useDrugLogic`.
+- **Modular Components**: Clean UI separation (Table, Filters, Pagination).
+- **Unit Testing**: 9 Integration tests covering all major user flows.
+
 ## How to Run Locally
 1. Clone the repository.
 2. Run `npm install` to install dependencies.
